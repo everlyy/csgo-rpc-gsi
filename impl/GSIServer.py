@@ -19,7 +19,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 		ParsePayload.parse_payload(self.gamestate, payload)
 
 		if self.on_payload_callback is not None:
-			self.on_payload_callback(self.gamestate)
+			self.on_payload_callback(self.gamestate, payload)
 
 		self.send_response(204)
 		self.end_headers()

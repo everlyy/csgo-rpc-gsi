@@ -1,6 +1,7 @@
 from config import *
 from impl.GSIServer import GSIServer
 from impl.DiscordRPC import DiscordRPC
+import json
 
 server = GSIServer(GSI_SERVER_ADDRESS, GSI_SERVER_TOKEN)
 rpc = DiscordRPC.init_for_os(DISCORD_RPC_CLIENT_ID)
@@ -49,8 +50,11 @@ def set_rpc(gamestate):
 
 	rpc.set_activity(activity)
 
-def on_payload(self, gamestate):
+def on_payload(self, gamestate, payload):
 	set_rpc(gamestate)
+
+	with open("gamestate.json", "w") as file:
+		file.write(json.dumps(payload, indent=4))
 
 server.set_payload_callback(on_payload)
 server.run()
