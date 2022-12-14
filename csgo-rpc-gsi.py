@@ -6,7 +6,9 @@ import json
 server = GSIServer(GSI_SERVER_ADDRESS, GSI_SERVER_TOKEN)
 rpc = DiscordRPC.init_for_os(DISCORD_RPC_CLIENT_ID)
 
-map_images = [ ]
+# List of map images that I've uploaded to the Discord application
+# If a map is not on this list it'll fallback to a question mark image
+map_images = [ "de_mirage", "cs_office", "de_cache", "de_nuke", "de_vertigo" ]
 
 def set_rpc(gamestate):
 	spectating = gamestate.player.steamid != YOUR_STEAMID
