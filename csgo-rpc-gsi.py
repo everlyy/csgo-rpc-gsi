@@ -20,6 +20,11 @@ def set_rpc(gamestate):
 	if gamestate.player.team == "T":
 		team_scores = f"{gamestate.map.team_t.score}:{gamestate.map.team_ct.score}"
 
+	team_scores = f"[{team_scores}]"
+
+	if gamestate.map.phase == "warmup":
+		team_scores = "warmup"
+
 	activity = {
 		"assets": {
 			"small_image": "csgo_logo",
@@ -31,7 +36,7 @@ def set_rpc(gamestate):
 	if gamestate.player.activity != "menu":
 		activity["assets"]["large_image"] = gamestate.map.name if gamestate.map.name in map_images else "unknown_map"
 		activity["assets"]["large_text"] = gamestate.map.name
-		activity["details"] = f"[{team_scores}] {gamestate.map.mode} {gamestate.map.name}"
+		activity["details"] = f"{team_scores} {gamestate.map.mode} {gamestate.map.name}"
 		activity["state"] = f"{player} {stats}"
 
 	if SHOW_GITHUB_URL and (not HIDE_MY_PROFILE and not spectating):
